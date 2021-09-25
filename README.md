@@ -10,6 +10,7 @@ example result at `grad_cam_result`
 |---------|
 |![cam](https://user-images.githubusercontent.com/51802825/132345537-db05224d-e6db-4925-84ff-16cad55f2d80.png)|
 
+# Vision Transformer (ViT)
 # Data Augmentation
 # Confusion Matrix
 # Knowledge distillation
