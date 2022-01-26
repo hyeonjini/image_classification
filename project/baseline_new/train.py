@@ -16,6 +16,7 @@ import torch.optim as optim
 import yaml
 
 from src.utils.common import read_yaml
+from src.model import Model
 
 def train(
     model_config: Dict[str, Any],
@@ -24,7 +25,16 @@ def train(
     fp16:bool,
     device:torch.device
 ) -> Tuple[float, float, float]:
-    pass
+
+    # Create 'data.yml' using 'data_config'
+    with open(os.path.join(log_dir, "data.yml"), "w") as f:
+        yaml.dump(data_config, f, default_flow_style=False)
+    
+    # Create 'model.yml' using 'model_config'
+    with open(os.path.join(log_dir, "model.yml"), "w") as f:
+        yaml.dump(model_config, f, default_flow_style=False)
+
+    model_instance = Model(model_config, verbose=True)
 
 if __name__ == "__main__":
     
