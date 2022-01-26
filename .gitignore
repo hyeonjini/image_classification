@@ -1,6 +1,7 @@
 .ipynb_checkpoints
 data/
-
+project/baseline_new/configs/model/*
+project/baseline_new/configs/data/*
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 
