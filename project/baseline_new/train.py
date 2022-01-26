@@ -17,6 +17,7 @@ import yaml
 
 from src.utils.common import read_yaml
 from src.model import Model
+from src.dataloader import create_dataloader
 
 def train(
     model_config: Dict[str, Any],
@@ -34,7 +35,30 @@ def train(
     with open(os.path.join(log_dir, "model.yml"), "w") as f:
         yaml.dump(model_config, f, default_flow_style=False)
 
+    # Model
     model_instance = Model(model_config, verbose=True)
+    model_path = os.path.join(log_dir, "best.pt")
+    print(f"model save path: {model_path}")
+    if os.path.isfile(model_path): # if already exists model file, load weight.
+        model_instance.model.load_state_dict(
+            torch.load(model_path, map_location=device)
+        )
+    model_instance.model.to(device)
+
+    # Dataloader
+    train_dl, val_dl, test_dl = create_dataloader(data_config)
+    # Optimizer
+
+    # Scheduler
+
+    # Criterion
+
+    # Automatic Mixed Precision(AMP) 
+
+    # Create trainer
+
+    # Evaluate model with test set
+
     return 1.0, 1.0, 1.0 # temp 
 
 if __name__ == "__main__":
