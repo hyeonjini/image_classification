@@ -35,6 +35,7 @@ def train(
         yaml.dump(model_config, f, default_flow_style=False)
 
     model_instance = Model(model_config, verbose=True)
+    return 1.0, 1.0, 1.0 # temp 
 
 if __name__ == "__main__":
     
