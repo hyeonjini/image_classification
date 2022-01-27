@@ -49,5 +49,10 @@ def get_dataset(
         __import__("arc.augmentation.policies", fromlist=[""])
     )
 
-def get_dataloader():
+def get_dataloader(
+    train_dataset: VisionDataset,
+    val_dataset: VisionDataset,
+    test_dataset: VisionDataset,
+    batch_size: int
+):
     pass
