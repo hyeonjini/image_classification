@@ -1,5 +1,6 @@
 """PyTorch transforms"""
 
+from torch import square
 import torchvision.transforms as transforms
 
 DATASET_NORMALIZE_INFO = {
@@ -24,3 +25,19 @@ def simple_augment_train(
             DATASET_NORMALIZE_INFO[dataset]["STD"],   
         )
     ])
+
+def simple_augment_test(
+    dataset: str,
+    img_size: float = 32
+) -> transforms.Compose:
+    return transforms.Compose([
+        transforms.Resize((img_size, img_size)),
+        transforms.ToTensor(),
+        transforms.Normalize(
+            DATASET_NORMALIZE_INFO[dataset]["MEAN"],
+            DATASET_NORMALIZE_INFO[dataset]["STD"],
+        ),
+    ])
+
+def randaugment_train():
+    pass
