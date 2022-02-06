@@ -1,0 +1,20 @@
+backbone:
+- - 1
+  - Linear
+  - - 64
+    - ReLU
+- - 1
+  - Linear
+  - - 32
+    - Softmax
+- - 1
+  - Linear
+  - - 16
+    - ReLU
+- - 1
+  - Linear
+  - - 10
+    - Softmax
+depth_multiple: 1.0
+input_channel: 128
+width_multiple: 1.0

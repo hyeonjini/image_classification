@@ -1,0 +1,13 @@
+AUG_TEST: simple_augment_test
+AUG_TEST_PARAMS: null
+AUG_TRAIN: simple_augment_train
+AUG_TRAIN_PARAMS: null
+BATCH_SIZE: 256
+DATASET: CIFAR10
+DATA_PATH: ./data/cifar10
+EPOCHS: 100
+FP16: false
+IMG_SIZE: 32
+INIT_LR: 0.1
+OPTIMIZER: SGD
+VAL_RATIO: 0.2
