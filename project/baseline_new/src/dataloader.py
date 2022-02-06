@@ -40,12 +40,12 @@ def create_dataloader(
 
 
 def get_dataset(
-    data_path: str = "./sva/data",
+    data_path: str = "./save/data",
     dataset_name: str = "CIFAR10",
     img_size: float = 32,
     val_ratio: float = 0.2,
     transform_train: str = "simple_augment_train",
-    transform_test: str ="simple_aumgent_test",
+    transform_test: str ="simple_augment_test",
     transform_train_params: Dict[str, int] = None,
     transform_test_params: Dict[str, int] = None,
 ) -> Tuple[VisionDataset, VisionDataset, VisionDataset]:
@@ -57,19 +57,23 @@ def get_dataset(
         transform_test_params = dict()
     
     # preprocessing policies
+    # return torchvision.transforms.Compose 
     transform_train = getattr(
-        __import__("arc.augmentation.policies", fromlist=[""]),
+        __import__("src.augmentation.policies", fromlist=[""]),
         transform_train,
-    )()
+    )(dataset=dataset_name, img_size=img_size, **transform_train_params)
 
     transform_test = getattr(
         __import__("src.augmentation.policies", fromlist=[""]),
         transform_test,
-    )()
+    )(dataset=dataset_name, img_size=img_size, **transform_test_params)
+
+    label_weights = None
 
     Dataset = getattr(
-        __import__("torchvision.datasets", fromlist=[""]), transform=transform_train
+        __import__("torchvision.datasets", fromlist=[""]), dataset_name
     )
+
     train_dataset = Dataset(
         root=data_path,
         train=True,

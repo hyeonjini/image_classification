@@ -47,12 +47,28 @@ def train(
 
     # Dataloader
     train_dl, val_dl, test_dl = create_dataloader(data_config)
+    print(train_dl, val_dl, test_dl)
     # Optimizer
-
+    optimizer = torch.optim.SGD(
+        model_instance.model.parameters(), lr=data_config["INIT_LR"], momentum=0.9
+    )
+    
+    # optimizer = getattr(
+    #     __import__("torch.optim", fromlist=[""]),
+    #     data_config["OPTIMIZER"]
+    # )(model_instance.model.parameters(), lr=data_config["INIT_LR"], momentum=0.9)
+    
     # Scheduler
+    scheduler = torch.optim.lr_scheduler.OneCycleLR(
+        optimizer=optimizer,
+        max_lr=data_config["INIT_LR"],
+        steps_per_epoch=len(train_dl),
+        epochs=data_config["EPOCHS"],
+        pct_start=0.05,
+    )
 
     # Criterion
-
+    
     # Automatic Mixed Precision(AMP) 
 
     # Create trainer
